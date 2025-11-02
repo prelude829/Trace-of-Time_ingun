@@ -27,7 +27,19 @@ async def create_memory(memory: MemoryInput):
 
         # 이미지 생성
         try:
-            image_url = generate_image(memory.text)
+            
+            image_val = gpt_result.get("이미지", memory.text)
+            emotion_val = gpt_result.get("감정", "")
+            era_val = gpt_result.get("시대", "")
+
+            combined_prompt = f"{image_val} {emotion_val} {era_val}".strip()
+
+            if combined_prompt:
+                image_prompt = combined_prompt
+            else:
+                image_prompt = memory.text
+
+            image_url = generate_image(image_prompt)
             logging.info(f"이미지 생성 완료: {image_url}")
         except Exception as img_err:
             logging.error(f"이미지 생성 실패: {img_err}")
