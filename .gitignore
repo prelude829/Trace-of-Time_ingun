@@ -1,0 +1,18 @@
+# Python 가상환경
+.venv/
+
+# IDE 설정
+.idea/
+.vscode/
+
+# 민감한 환경 변수 파일
+.env
+
+# 로그 파일 및 기타
+*.log
+
+# GitHub가 차단한 개인 메모 파일
+메모.txt
+
+# 파이썬 캐시.
+.__pycache__/
