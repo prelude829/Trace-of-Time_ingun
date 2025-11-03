@@ -23,7 +23,17 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = await response.json();
 
             if (data.gpt_analysis && data.image_url) {
-                analysisEl.textContent = data.gpt_analysis.analysis;
+                
+                const parsed = data.gpt_analysis;
+
+                analysisEl.innerHTML =`
+                    <div class="analysis-box text-start" style="padding-left: 15px;">
+                        <p><strong>감정:</strong> ${parsed.emotion || "-"}</p>
+                        <p><strong>이미지:</strong> ${parsed.imagery || "-"}</p>
+                        <p><strong>상징:</strong> ${parsed.symbolism || "-"}</p>
+                        <p><strong>시대:</strong> ${parsed.time_period || "-"}</p>
+                    </div>
+                `;
                 imageEl.src = data.image_url;
                 retryBtn.style.display = "inline-block";
             } else {
